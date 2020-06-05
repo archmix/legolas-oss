@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>legolas-oss</artifactId>
+        <groupId>org.archmix</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>legolas-provided</artifactId>
+
+    <properties>
+        <hikaricpVersion>3.4.5</hikaricpVersion>
+        <oracleVersion>19.3.0.0</oracleVersion>
+        <sqlserverVersion>8.2.1.jre8</sqlserverVersion>
+        <postgresqlVersion>9.1-901-1.jdbc4</postgresqlVersion>
+    </properties>
+
+    <dependencies>
+
+        <!-- COMPILE -->
+        <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>${oracleVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>${sqlserverVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresqlVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikaricpVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archmix</groupId>
+            <artifactId>compozitor-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${sl4jVersion}</version>
+        </dependency>
+
+        <!--TEST -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.archmix</groupId>
+            <artifactId>compozitor-test</artifactId>
+        </dependency>
+    </dependencies>
+</project>

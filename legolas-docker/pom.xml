@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>legolas-oss</artifactId>
+        <groupId>org.archmix</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>legolas-docker</artifactId>
+
+    <dependencies><!-- COMPILE -->
+        <dependency>
+            <groupId>org.archmix</groupId>
+            <artifactId>legolas-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archmix</groupId>
+            <artifactId>legolas-provided</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--TEST -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.archmix</groupId>
+            <artifactId>compozitor-test</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
