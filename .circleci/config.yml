@@ -1,5 +1,4 @@
 version: 2.1
-machine: true
 
 orbs:
   maven: archmix/maven@2.0.0
