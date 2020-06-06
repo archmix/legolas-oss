@@ -12,17 +12,17 @@ import java.util.Set;
 @Processor
 public class StarterComponentProcessor extends ServiceProcessor {
 
-    public StarterComponentProcessor() {
-        this.traverseAncestors();
-    }
+  public StarterComponentProcessor() {
+    this.traverseAncestors();
+  }
 
-    @Override
-    protected Iterable<Class<?>> serviceClasses() {
-        return Arrays.asList(Starter.class);
-    }
+  @Override
+  protected Iterable<Class<?>> serviceClasses() {
+    return Arrays.asList(Starter.class);
+  }
 
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(StarterComponent.class.getName());
-    }
+  @Override
+  public Set<String> getSupportedAnnotationTypes() {
+    return Sets.newHashSet(StarterComponent.class.getName());
+  }
 }

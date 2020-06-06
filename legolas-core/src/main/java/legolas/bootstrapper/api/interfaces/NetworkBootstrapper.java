@@ -8,9 +8,9 @@ import legolas.runtime.core.interfaces.LifecycleService;
 import java.util.stream.Stream;
 
 public interface NetworkBootstrapper extends LifecycleService {
-    Configuration bootstrap(Stream<Port> availablePorts);
+  Configuration bootstrap(Stream<Port> availablePorts);
 
-    Stream<Port> ports();
+  Stream<Port> ports();
 
-    SocketType socketType();
+  SocketType socketType();
 }

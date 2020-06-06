@@ -10,27 +10,29 @@ import org.slf4j.LoggerFactory;
 import java.util.ServiceLoader;
 
 class StarterRunner {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public void run(RunningEnvironment environment) {
-        ServiceLoader.load(Starter.class).forEach(service -> {
-            logger.info("{} initializing", service.name());
+  public void run(RunningEnvironment environment) {
+    ServiceLoader.load(Starter.class).forEach(service -> {
+      logger.info("{} initializing", service.name());
 
-            Configuration configuration = service.configuration();
-            environment.add(RunningInstance.create(service.id(), configuration));
+      Configuration configuration = service.configuration();
+      environment.add(RunningInstance.create(service.id(), configuration));
 
-            boolean shouldStart = true;
-            if (service instanceof PortStarter) {
-                shouldStart = this.shouldStart((PortStarter) service);
-            }
+      boolean shouldStart = true;
+      if (service instanceof PortStarter) {
+        shouldStart = this.shouldStart((PortStarter) service);
+      }
 
-            service.start();
-        });
-    }
+      if (shouldStart) {
+        service.start();
+      }
+    });
+  }
 
-    private boolean shouldStart(PortStarter starter) {
-        LocalPortBinding localPortBinding = LocalPortBinding.create(starter.socketType());
+  private boolean shouldStart(PortStarter starter) {
+    LocalPortBinding localPortBinding = LocalPortBinding.create(starter.socketType());
 
-        return starter.ports().allMatch(localPortBinding.availablePredicate());
-    }
+    return starter.ports().allMatch(localPortBinding.availablePredicate());
+  }
 }

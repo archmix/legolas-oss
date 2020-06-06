@@ -1,5 +1,5 @@
 CREATE TABLE Tablename (
-    id bigint not null,
-    datetime timestamp not null,
-    name text not null
+    id number not null,
+    datetime timestamp(2) not null,
+    name varchar2(100) not null
 )

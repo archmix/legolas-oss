@@ -4,7 +4,7 @@ import legolas.config.api.interfaces.Configuration;
 import legolas.runtime.core.interfaces.LifecycleService;
 
 public interface Starter extends LifecycleService {
-    void start();
+  void start();
 
-    Configuration configuration();
+  Configuration configuration();
 }

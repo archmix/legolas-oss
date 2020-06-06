@@ -3,10 +3,10 @@ package legolas.oracle.interfaces;
 import legolas.runtime.core.interfaces.ServiceId;
 
 public enum OracleServiceId implements ServiceId {
-    INSTANCE;
+  INSTANCE;
 
-    @Override
-    public String value() {
-        return "SQLServer.Id";
-    }
+  @Override
+  public String value() {
+    return "Oracle.Id";
+  }
 }

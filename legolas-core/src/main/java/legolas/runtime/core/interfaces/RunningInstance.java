@@ -8,29 +8,29 @@ import java.util.Optional;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RunningInstance<Reference> {
-    private final ServiceId id;
+  private final ServiceId id;
 
-    private final Configuration configuration;
+  private final Configuration configuration;
 
-    private final Optional<Reference> reference;
+  private final Optional<Reference> reference;
 
-    public static <Reference> RunningInstance create(ServiceId id, Configuration configuration, Reference reference) {
-        return new RunningInstance(id, configuration, Optional.of(reference));
-    }
+  public static <Reference> RunningInstance create(ServiceId id, Configuration configuration, Reference reference) {
+    return new RunningInstance(id, configuration, Optional.of(reference));
+  }
 
-    public static RunningInstance<?> create(ServiceId id, Configuration configuration) {
-        return new RunningInstance<>(id, configuration, Optional.empty());
-    }
+  public static RunningInstance<?> create(ServiceId id, Configuration configuration) {
+    return new RunningInstance<>(id, configuration, Optional.empty());
+  }
 
-    public ServiceId id() {
-        return this.id;
-    }
+  public ServiceId id() {
+    return this.id;
+  }
 
-    public Configuration configuration() {
-        return this.configuration;
-    }
+  public Configuration configuration() {
+    return this.configuration;
+  }
 
-    public Optional<Reference> reference() {
-        return this.reference;
-    }
+  public Optional<Reference> reference() {
+    return this.reference;
+  }
 }

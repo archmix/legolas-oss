@@ -13,13 +13,13 @@ import java.util.Set;
 @Processor
 public class BootstrapperComponentProcessor extends ServiceProcessor {
 
-    @Override
-    protected Iterable<Class<?>> serviceClasses() {
-        return Arrays.asList(NetworkBootstrapper.class, Bootstrapper.class);
-    }
+  @Override
+  protected Iterable<Class<?>> serviceClasses() {
+    return Arrays.asList(NetworkBootstrapper.class, Bootstrapper.class);
+  }
 
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(BootstrapperComponent.class.getName());
-    }
+  @Override
+  public Set<String> getSupportedAnnotationTypes() {
+    return Sets.newHashSet(BootstrapperComponent.class.getName());
+  }
 }

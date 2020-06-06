@@ -3,37 +3,36 @@ package legolas.oracle.infra;
 import legolas.config.api.interfaces.Configuration;
 import legolas.migration.api.interfaces.MigrationComponent;
 import legolas.migration.api.interfaces.MigrationId;
-import legolas.migration.core.interfaces.MigramiMigration;
 import legolas.oracle.interfaces.OracleEntry;
 import legolas.oracle.interfaces.OracleServiceId;
-import legolas.runtime.core.interfaces.RunningEnvironment;
-import migrami.core.interfaces.Migrami;
-import migrami.core.interfaces.MigramiCategory;
-import migrami.sql.interfaces.MigramiSQLEngineBuilder;
+import legolas.runtime.core.interfaces.ServiceId;
+import legolas.sql.interfaces.DatabaseConfiguration;
+import legolas.sql.interfaces.SQLMigration;
 
 @MigrationComponent
-public class OracleMigration extends MigramiMigration {
+public class OracleMigration extends SQLMigration {
 
-    @Override
-    protected Migrami migrami(RunningEnvironment runningEnvironment, MigramiCategory category) {
-        Configuration configuration = runningEnvironment.get(OracleServiceId.INSTANCE).get().configuration();
-        String url = configuration.getString(OracleEntry.URL).get();
-        String user = configuration.getString(OracleEntry.USERNAME).get();
-        String password = configuration.getString(OracleEntry.PASSWORD).get();
+  @Override
+  protected DatabaseConfiguration toDatabaseConfiguration(Configuration configuration) {
+    String url = configuration.getString(OracleEntry.URL).get();
+    String user = configuration.getString(OracleEntry.USERNAME).get();
+    String password = configuration.getString(OracleEntry.PASSWORD).get();
 
-        return MigramiSQLEngineBuilder.create().withDatasource(url, user, password)
-            .withClasspathScriptLoader("", category)
-            .withTableSnapshotRepository()
-            .build();
-    }
+    return DatabaseConfiguration.create(url, user, password);
+  }
 
-    @Override
-    protected String migrationPath() {
-        return "oracle/migration";
-    }
+  @Override
+  protected ServiceId targetService() {
+    return OracleServiceId.INSTANCE;
+  }
 
-    @Override
-    public MigrationId id() {
-        return () -> "migration.oracle";
-    }
+  @Override
+  protected String migrationPath() {
+    return "oracle/migration";
+  }
+
+  @Override
+  public MigrationId id() {
+    return () -> "migration.oracle";
+  }
 }
