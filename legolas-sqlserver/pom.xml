@@ -2,52 +2,38 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>legolas-oss</artifactId>
-        <groupId>org.archmix</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+  <parent>
+    <artifactId>legolas-oss</artifactId>
+    <groupId>org.archmix</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>legolas-sqlserver</artifactId>
+  <artifactId>legolas-sqlserver</artifactId>
 
-    <dependencies><!-- COMPILE -->
-        <dependency>
-            <groupId>org.archmix</groupId>
-            <artifactId>legolas-docker</artifactId>
-        </dependency>
+  <dependencies>
+    <!-- COMPILE -->
+    <dependency>
+      <groupId>org.archmix</groupId>
+      <artifactId>legolas-sql</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.archmix</groupId>
-            <artifactId>migrami-sql</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>mssqlserver</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>mssqlserver</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.archmix</groupId>
+      <artifactId>legolas-provided</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
-        <dependency>
-            <groupId>org.archmix</groupId>
-            <artifactId>legolas-provided</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-
-        <!--TEST -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.archmix</groupId>
-            <artifactId>compozitor-test</artifactId>
-        </dependency>
-    </dependencies>
-
+    <!--TEST -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
 </project>

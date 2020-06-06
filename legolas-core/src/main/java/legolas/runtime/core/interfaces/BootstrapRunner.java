@@ -14,46 +14,46 @@ import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
 class BootstrapRunner {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public void run(RunningEnvironment environment) {
-        ServiceLoader.load(Bootstrapper.class)
-                .forEach(service -> {
-                    logger.info("{} initializing", service.name());
-                    RunningInstance instance = null;
+  public void run(RunningEnvironment environment) {
+    ServiceLoader.load(Bootstrapper.class)
+      .forEach(service -> {
+        logger.info("{} initializing", service.name());
+        RunningInstance instance = null;
 
-                    if (service instanceof NetworkBootstrapper) {
-                        environment.add(
-                                this.bootstrap((NetworkBootstrapper) service)
-                        );
-                    } else {
-                        environment.add(
-                                this.bootstrap(service, environment.configuration())
-                        );
-                        logger.info("{} started", service.name());
-                    }
+        if (service instanceof NetworkBootstrapper) {
+          environment.add(
+            this.bootstrap((NetworkBootstrapper) service)
+          );
+        } else {
+          environment.add(
+            this.bootstrap(service, environment.configuration())
+          );
+          logger.info("{} started", service.name());
+        }
 
-                    environment.add(instance);
-                });
-    }
+        environment.add(instance);
+      });
+  }
 
-    private RunningInstance bootstrap(Bootstrapper bootstrapper, Configuration configuration) {
-        Object reference = bootstrapper.bootstrap(configuration);
-        logger.info("{} properly bootstrapped", bootstrapper.name());
-        return RunningInstance.create(bootstrapper.id(), configuration, reference);
-    }
+  private RunningInstance bootstrap(Bootstrapper bootstrapper, Configuration configuration) {
+    Object reference = bootstrapper.bootstrap(configuration);
+    logger.info("{} properly bootstrapped", bootstrapper.name());
+    return RunningInstance.create(bootstrapper.id(), configuration, reference);
+  }
 
-    private RunningInstance bootstrap(NetworkBootstrapper service) {
-        LocalPortBinding localPortBinding = LocalPortBinding.create(service.socketType());
+  private RunningInstance bootstrap(NetworkBootstrapper service) {
+    LocalPortBinding localPortBinding = LocalPortBinding.create(service.socketType());
 
-        List<Port> availablePorts = new ArrayList<>();
-        service.ports().forEach(port -> {
-            availablePorts.add(localPortBinding.nextPortAvailable(port));
-        });
+    List<Port> availablePorts = new ArrayList<>();
+    service.ports().forEach(port -> {
+      availablePorts.add(localPortBinding.nextPortAvailable(port));
+    });
 
-        Configuration configuration = service.bootstrap(availablePorts.stream());
+    Configuration configuration = service.bootstrap(availablePorts.stream());
 
-        logger.info("{} started using ports {}", service.name(), availablePorts.stream().map(port -> port.toString()).collect(Collectors.joining(",")));
-        return RunningInstance.create(service.id(), configuration);
-    }
+    logger.info("{} started using ports {}", service.name(), availablePorts.stream().map(port -> port.toString()).collect(Collectors.joining(",")));
+    return RunningInstance.create(service.id(), configuration);
+  }
 }

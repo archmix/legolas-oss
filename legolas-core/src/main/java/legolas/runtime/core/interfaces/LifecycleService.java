@@ -1,7 +1,7 @@
 package legolas.runtime.core.interfaces;
 
 public interface LifecycleService {
-    ServiceId id();
+  ServiceId id();
 
-    String name();
+  String name();
 }

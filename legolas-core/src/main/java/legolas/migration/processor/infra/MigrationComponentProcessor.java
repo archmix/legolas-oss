@@ -12,13 +12,13 @@ import java.util.Set;
 @Processor
 public class MigrationComponentProcessor extends ServiceProcessor {
 
-    @Override
-    protected Iterable<Class<?>> serviceClasses() {
-        return Arrays.asList(Migration.class);
-    }
+  @Override
+  protected Iterable<Class<?>> serviceClasses() {
+    return Arrays.asList(Migration.class);
+  }
 
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(MigrationComponent.class.getName());
-    }
+  @Override
+  public Set<String> getSupportedAnnotationTypes() {
+    return Sets.newHashSet(MigrationComponent.class.getName());
+  }
 }
