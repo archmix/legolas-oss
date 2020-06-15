@@ -25,6 +25,7 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
   static final Integer DEFAULT_PORT = 1521;
 
   public OracleStarter() {
+    System.setProperty("oracle.jdbc.timezoneAsRegion", "false");
     String url = String.format("jdbc:oracle:thin:@%s:%d/xe", this.dockerHost(), DEFAULT_PORT);
     this.configuration
       .set(OracleEntry.HOST, this.dockerHost())
