@@ -4,6 +4,7 @@ import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 import com.google.common.collect.Maps;
 import legolas.config.api.interfaces.Configuration;
+import legolas.runtime.core.interfaces.RuntimeEnvironment;
 import legolas.starter.api.interfaces.PortStarter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,34 +53,54 @@ public abstract class DockerStarter<C extends GenericContainer> implements PortS
   }
 
   @Override
-  public final void start() {
+  public final void start(RuntimeEnvironment runtimeEnvironment) {
     try {
-      Map<String, String> labels = Maps.newHashMap();
-      labels.put("legolas-starter", this.id().value());
+      Map<String, String> labels = labels();
 
       C targetContainer = this.container();
 
-      DockerClient client = this.dockerClientFactory.client();
-      List<Container> containers = client.listContainersCmd().withShowAll(true).withLabelFilter(labels).exec();
-      for (Container container : containers) {
-        String state = container.getState();
-        if ("exited".equalsIgnoreCase(state)) {
-          client.startContainerCmd(container.getId()).exec();
-        }
+      if(runtimeEnvironment == RuntimeEnvironment.LOCAL) {
+        startContainer(labels);
+        targetContainer.withReuse(true).withNetwork(null).withLabels(labels);
       }
 
       List<String> portBindings = this.ports().map(port -> String.format("%d:%d", port.value(), port.value())).collect(Collectors.toList());
       targetContainer.setPortBindings(portBindings);
 
-      targetContainer.withLogConsumer(new Slf4jLogConsumer(logger))
-        .withReuse(true)
-        .withNetwork(null)
-        .withLabels(labels)
-        .start();
+      targetContainer.withLogConsumer(new Slf4jLogConsumer(logger)).start();
 
       this.setConfiguration(targetContainer);
     } catch (RuntimeException e) {
       this.fallbackStart(e);
+    }
+  }
+
+  private Map<String, String> labels() {
+    Map<String, String> labels = Maps.newHashMap();
+    labels.put("legolas-starter", this.id().value());
+    return labels;
+  }
+
+  private void startContainer(Map<String, String> labels) {
+    DockerClient client = this.dockerClientFactory.client();
+    List<Container> containers = client.listContainersCmd().withShowAll(true).withLabelFilter(labels).exec();
+    for (Container container : containers) {
+      String state = container.getState();
+      if ("exited".equalsIgnoreCase(state)) {
+        client.startContainerCmd(container.getId()).exec();
+      }
+    }
+  }
+
+  public void stop() {
+    Map<String, String> labels = this.labels();
+    DockerClient client = this.dockerClientFactory.client();
+    List<Container> containers = client.listContainersCmd().withShowAll(true).withLabelFilter(labels).exec();
+    for (Container container : containers) {
+      String state = container.getState();
+      if ("running".equalsIgnoreCase(state)) {
+        client.stopContainerCmd(container.getId()).exec();
+      }
     }
   }
 

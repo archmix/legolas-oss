@@ -21,16 +21,20 @@ class StarterRunner {
 
       boolean shouldStart = true;
       if (service instanceof PortStarter) {
-        shouldStart = this.shouldStart((PortStarter) service);
+        shouldStart = this.shouldStart((PortStarter) service, environment.runtimeEnvironment());
       }
 
       if (shouldStart) {
-        service.start();
+        service.start(environment.runtimeEnvironment());
       }
     });
   }
 
-  private boolean shouldStart(PortStarter starter) {
+  private boolean shouldStart(PortStarter starter, RuntimeEnvironment runtimeEnvironment) {
+    if (runtimeEnvironment == RuntimeEnvironment.TEST) {
+      starter.stop();
+    }
+
     LocalPortBinding localPortBinding = LocalPortBinding.create(starter.socketType());
 
     return starter.ports().allMatch(localPortBinding.availablePredicate());
