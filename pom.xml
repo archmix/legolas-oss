@@ -11,7 +11,7 @@
 
   <groupId>org.archmix</groupId>
   <artifactId>legolas-oss</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -28,7 +28,7 @@
     <jacksonVersion>2.11.0</jacksonVersion>
     <h2Version>1.4.199</h2Version>
 
-    <legolasVersion>1.0.2-SNAPSHOT</legolasVersion>
+    <legolasVersion>1.0.2</legolasVersion>
     <migramiVersion>0.0.7</migramiVersion>
     <compozitorVersion>0.1.11</compozitorVersion>
     <testcontainersVersion>1.14.2</testcontainersVersion>
@@ -148,7 +148,7 @@
   <scm>
     <connection>scm:git:git://github.com/archmix/${project.artifactId}.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/archmix/${project.artifactId}.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v1.0.2</tag>
     <url>https://github.com/archmix</url>
   </scm>
 
