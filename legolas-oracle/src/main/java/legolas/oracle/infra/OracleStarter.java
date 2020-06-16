@@ -6,7 +6,6 @@ import legolas.oracle.interfaces.OracleEntry;
 import legolas.oracle.interfaces.OracleServiceId;
 import legolas.runtime.core.interfaces.ServiceId;
 import legolas.sql.interfaces.DataSet;
-import legolas.sql.interfaces.DatabaseConfiguration;
 import legolas.sql.interfaces.DatasourceFactory;
 import legolas.sql.interfaces.SQLExecutor;
 import legolas.sql.interfaces.SQLStarter;
@@ -43,7 +42,6 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
 
   @Override
   protected void setConfiguration(OracleContainer container) {
-    logger.info("Using jdbc url {}", container.getJdbcUrl());
     DataSource dataSource = DatasourceFactory.toDataSource(container.getJdbcUrl(), JDBC_DRIVER_NAME);
     SQLExecutor sqlExecutor = SQLExecutor.create(dataSource);
 
@@ -57,15 +55,6 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
     String grantDBA = String.format("GRANT DBA TO %s", this.username());
     sqlExecutor.execute(createUser);
     sqlExecutor.execute(grantDBA);
-  }
-
-  @Override
-  protected void setConfiguration(DatabaseConfiguration databaseConfiguration) {
-    this.configuration
-      .set(OracleEntry.USERNAME, databaseConfiguration.getUsername())
-      .set(OracleEntry.PASSWORD, databaseConfiguration.getPassword())
-      .set(OracleEntry.URL, databaseConfiguration.getUrl())
-      .set(OracleEntry.DRIVER, "org.h2.Driver");
   }
 
   @Override

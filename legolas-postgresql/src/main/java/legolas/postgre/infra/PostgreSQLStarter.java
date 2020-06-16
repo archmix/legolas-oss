@@ -19,10 +19,10 @@ public class PostgreSQLStarter extends SQLStarter<PostgreSQLContainer> {
   static final String PASSWORD = "postgre";
   static final String JDBC_DRIVER_NAME = "org.postgresql.Driver";
   static final int DEFAULT_PORT = 5432;
-  static final String DATABASE_NAME = "postgres";
 
   public PostgreSQLStarter() {
-    String url = String.format("jdbc:postgresql://%s:%d/%s?loggerLevel=OFF", this.dockerHost(), DEFAULT_PORT, DATABASE_NAME);
+    String database = this.databaseName();
+    String url = String.format("jdbc:postgresql://%s:%d/%s", this.dockerHost(), DEFAULT_PORT, database);
     this.configuration
       .set(PostgreSQLEntry.HOST, this.dockerHost())
       .set(PostgreSQLEntry.PORT, DEFAULT_PORT)
@@ -36,24 +36,16 @@ public class PostgreSQLStarter extends SQLStarter<PostgreSQLContainer> {
   protected PostgreSQLContainer container() {
     return new PostgreSQLContainer().withUsername(this.username())
       .withPassword(PASSWORD)
-      .withDatabaseName(DATABASE_NAME);
+      .withDatabaseName(this.databaseName());
   }
 
   @Override
   protected void setConfiguration(PostgreSQLContainer container) {
-    this.configuration
-      .set(PostgreSQLEntry.USERNAME, container.getUsername())
-      .set(PostgreSQLEntry.URL, container.getJdbcUrl())
-      .set(PostgreSQLEntry.DRIVER, container.getDriverClassName());
+    this.configuration.set(PostgreSQLEntry.URL, container.getJdbcUrl());
   }
 
-  @Override
-  protected void setConfiguration(DatabaseConfiguration databaseConfiguration) {
-    this.configuration
-      .set(PostgreSQLEntry.USERNAME, databaseConfiguration.getUsername())
-      .set(PostgreSQLEntry.PASSWORD, databaseConfiguration.getPassword())
-      .set(PostgreSQLEntry.URL, databaseConfiguration.getUrl())
-      .set(PostgreSQLEntry.DRIVER, "org.h2.Driver");
+  private String databaseName(){
+    return this.username().toLowerCase();
   }
 
   @Override

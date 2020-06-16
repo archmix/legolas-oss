@@ -54,25 +54,21 @@ public abstract class DockerStarter<C extends GenericContainer> implements PortS
 
   @Override
   public final void start(RuntimeEnvironment runtimeEnvironment) {
-    try {
-      Map<String, String> labels = labels();
+    Map<String, String> labels = labels();
 
-      C targetContainer = this.container();
+    C targetContainer = this.container();
 
-      if(runtimeEnvironment == RuntimeEnvironment.LOCAL) {
-        startContainer(labels);
-        targetContainer.withReuse(true).withNetwork(null).withLabels(labels);
-      }
-
-      List<String> portBindings = this.ports().map(port -> String.format("%d:%d", port.value(), port.value())).collect(Collectors.toList());
-      targetContainer.setPortBindings(portBindings);
-
-      targetContainer.withLogConsumer(new Slf4jLogConsumer(logger)).start();
-
-      this.setConfiguration(targetContainer);
-    } catch (RuntimeException e) {
-      this.fallbackStart(e);
+    if(runtimeEnvironment == RuntimeEnvironment.LOCAL) {
+      startContainer(labels);
+      targetContainer.withReuse(true).withNetwork(null).withLabels(labels);
     }
+
+    List<String> portBindings = this.ports().map(port -> String.format("%d:%d", port.value(), port.value())).collect(Collectors.toList());
+    targetContainer.setPortBindings(portBindings);
+
+    targetContainer.withLogConsumer(new Slf4jLogConsumer(logger)).start();
+
+    this.setConfiguration(targetContainer);
   }
 
   private Map<String, String> labels() {
@@ -104,13 +100,7 @@ public abstract class DockerStarter<C extends GenericContainer> implements PortS
     }
   }
 
-  protected Long startupTimeout() {
-    return DEFAULT_STARTUP_TIMEOUT_SECONDS * 1000;
-  }
-
   protected abstract void setConfiguration(C container);
-
-  protected abstract void fallbackStart(RuntimeException e);
 
   protected abstract C container();
 
