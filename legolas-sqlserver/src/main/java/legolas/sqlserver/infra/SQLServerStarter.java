@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @StarterComponent
 public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
-  static final String DEFAULT_PASSWORD = "A_Str0ng_Required_Password";
+  static final String DEFAULT_PASSWORD = "$qlS3rver";
   static final String JDBC_DRIVER_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
   static final int DEFAULT_PORT = 1433;
 
@@ -25,7 +25,7 @@ public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
     this.configuration
       .set(SQLServerEntry.HOST, this.dockerHost())
       .set(SQLServerEntry.PORT, DEFAULT_PORT)
-      .set(SQLServerEntry.USERNAME, "SA")
+      .set(SQLServerEntry.USERNAME, this.username())
       .set(SQLServerEntry.PASSWORD, DEFAULT_PASSWORD)
       .set(SQLServerEntry.DRIVER, JDBC_DRIVER_NAME)
       .set(SQLServerEntry.URL, url);
@@ -51,6 +51,11 @@ public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
       .set(SQLServerEntry.PASSWORD, databaseConfiguration.getPassword())
       .set(SQLServerEntry.URL, databaseConfiguration.getUrl())
       .set(SQLServerEntry.DRIVER, "org.h2.Driver");
+  }
+
+  @Override
+  protected String username() {
+    return "sa";
   }
 
   @Override

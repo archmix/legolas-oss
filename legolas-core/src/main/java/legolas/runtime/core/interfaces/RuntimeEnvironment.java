@@ -2,10 +2,7 @@ package legolas.runtime.core.interfaces;
 
 import legolas.async.api.interfaces.Promise;
 import legolas.config.api.interfaces.Configuration;
-import sun.security.krb5.Config;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 
