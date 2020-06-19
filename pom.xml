@@ -30,7 +30,7 @@
     <h2Version>1.4.199</h2Version>
 
     <legolasVersion>1.0.3-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.8</migramiVersion>
+    <migramiVersion>0.0.9</migramiVersion>
     <compozitorVersion>0.1.11</compozitorVersion>
     <testcontainersVersion>1.14.2</testcontainersVersion>
   </properties>
