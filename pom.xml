@@ -22,6 +22,7 @@
     <module>legolas-postgresql</module>
     <module>legolas-sql</module>
     <module>legolas-sqlserver</module>
+    <module>legolas-mysql</module>
   </modules>
 
   <properties>
@@ -29,7 +30,7 @@
     <h2Version>1.4.199</h2Version>
 
     <legolasVersion>1.0.4-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.9</migramiVersion>
+    <migramiVersion>0.0.10</migramiVersion>
     <compozitorVersion>0.1.11</compozitorVersion>
     <testcontainersVersion>1.14.2</testcontainersVersion>
   </properties>
