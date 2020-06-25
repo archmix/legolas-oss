@@ -20,7 +20,6 @@ import java.util.stream.Stream;
 @StarterComponent
 public class MySQLStarter extends SQLStarter<MySQLContainer> {
   static final String DEFAULT_PASSWORD = "my-secret-pw";
-  static final String DEFAULT_USER = "root";
   static final String JDBC_DRIVER_NAME = "com.mysql.jdbc.Driver";
   static final Integer DEFAULT_PORT = 3306;
 
@@ -29,7 +28,7 @@ public class MySQLStarter extends SQLStarter<MySQLContainer> {
     this.configuration
       .set(MySQLEntry.HOST, this.dockerHost())
       .set(MySQLEntry.PORT, DEFAULT_PORT)
-      .set(MySQLEntry.USERNAME, DEFAULT_USER)
+      .set(MySQLEntry.USERNAME, username())
       .set(MySQLEntry.PASSWORD, DEFAULT_PASSWORD)
       .set(MySQLEntry.DRIVER, JDBC_DRIVER_NAME)
       .set(MySQLEntry.URL, url);
@@ -59,7 +58,7 @@ public class MySQLStarter extends SQLStarter<MySQLContainer> {
 
   @Override
   protected String username() {
-    return DEFAULT_USER;
+    return "root";
   }
 
   @Override
