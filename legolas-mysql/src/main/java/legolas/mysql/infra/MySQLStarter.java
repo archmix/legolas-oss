@@ -28,7 +28,7 @@ public class MySQLStarter extends SQLStarter<MySQLContainer> {
     this.configuration
       .set(MySQLEntry.HOST, this.dockerHost())
       .set(MySQLEntry.PORT, DEFAULT_PORT)
-      .set(MySQLEntry.USERNAME, username())
+      .set(MySQLEntry.USERNAME, this.username())
       .set(MySQLEntry.PASSWORD, DEFAULT_PASSWORD)
       .set(MySQLEntry.DRIVER, JDBC_DRIVER_NAME)
       .set(MySQLEntry.URL, url);
@@ -50,6 +50,11 @@ public class MySQLStarter extends SQLStarter<MySQLContainer> {
       String createDatabase = MessageFormat.format("CREATE DATABASE {0}", this.databaseName());
       sqlExecutor.execute(createDatabase);
     }
+
+    String createUser = String.format("CREATE USER '%s'@'localhost' IDENTIFIED BY '%s';", this.username(),"");
+    String grantDBA = String.format("GRANT ALL PRIVILEGES ON %s.* TO '%s'@'localhost';",this.databaseName(), this.username());
+    sqlExecutor.execute(createUser);
+    sqlExecutor.execute(grantDBA);
   }
 
   public String databaseName() {
