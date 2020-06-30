@@ -1,9 +1,10 @@
 package legolas.sql.interfaces;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataObject {
+public class DataObject implements Serializable {
   private Map<String, Object> data;
 
   public DataObject() {

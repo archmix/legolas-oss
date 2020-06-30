@@ -1,39 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>legolas-oss</artifactId>
     <groupId>org.archmix</groupId>
     <version>1.0.4-SNAPSHOT</version>
   </parent>
 
-  <artifactId>legolas-sql</artifactId>
+  <modelVersion>4.0.0</modelVersion>
 
-  <properties>
-    <hikaricpVersion>3.4.5</hikaricpVersion>
-  </properties>
+  <artifactId>legolas-mysql</artifactId>
 
   <dependencies>
     <!-- COMPILE -->
     <dependency>
       <groupId>org.archmix</groupId>
-      <artifactId>legolas-docker</artifactId>
+      <artifactId>legolas-sql</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
-      <version>${hikaricpVersion}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.archmix</groupId>
-      <artifactId>migrami-sql</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>mysql</artifactId>
     </dependency>
 
     <dependency>
@@ -47,10 +33,5 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.archmix</groupId>
-      <artifactId>compozitor-test</artifactId>
-    </dependency>
   </dependencies>
-
 </project>

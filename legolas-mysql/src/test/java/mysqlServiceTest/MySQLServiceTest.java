@@ -1,12 +1,12 @@
-package sqlServerServiceTest;
+package mysqlServiceTest;
 
 import legolas.async.api.interfaces.Promise;
 import legolas.config.api.interfaces.Configuration;
 import legolas.runtime.core.interfaces.RunningEnvironment;
 import legolas.runtime.core.interfaces.RuntimeEnvironment;
 import legolas.sql.interfaces.DatasourceFactory;
-import legolas.mysql.interfaces.SQLServerEntry;
-import legolas.mysql.interfaces.SQLServerServiceId;
+import legolas.mysql.interfaces.MySQLEntry;
+import legolas.mysql.interfaces.MySQLServiceId;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SQLServerServiceTest {
+public class MySQLServiceTest {
 
   @Test
   public void shouldStartSQLServerAndMigrate() {
@@ -26,11 +26,11 @@ public class SQLServerServiceTest {
     Promise<RunningEnvironment> promise = RuntimeEnvironment.TEST.start(executorService);
     RunningEnvironment environment = promise.get();
 
-    Configuration configuration = environment.get(SQLServerServiceId.INSTANCE).get().configuration();
-    String url = configuration.getString(SQLServerEntry.URL).get();
-    String driver = configuration.getString(SQLServerEntry.DRIVER).get();
-    String username = configuration.getString(SQLServerEntry.USERNAME).get();
-    String password = configuration.getString(SQLServerEntry.PASSWORD).get();
+    Configuration configuration = environment.get(MySQLServiceId.INSTANCE).get().configuration();
+    String url = configuration.getString(MySQLEntry.URL).get();
+    String driver = configuration.getString(MySQLEntry.DRIVER).get();
+    String username = configuration.getString(MySQLEntry.USERNAME).get();
+    String password = configuration.getString(MySQLEntry.PASSWORD).get();
 
     DataSource dataSource = DatasourceFactory.toDataSource(url, driver, username, password);
     assertMigration(dataSource);

@@ -18,6 +18,12 @@ public enum TargetDatabase {
     public String h2Mode() {
       return "PostgreSQL";
     }
+  },
+  MYSQL {
+    @Override
+    public String h2Mode() {
+      return "MySQL";
+    }
   };
 
   public abstract String h2Mode();
