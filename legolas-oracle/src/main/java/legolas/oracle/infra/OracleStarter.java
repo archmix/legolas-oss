@@ -5,13 +5,13 @@ import legolas.net.core.interfaces.SocketType;
 import legolas.oracle.interfaces.OracleEntry;
 import legolas.oracle.interfaces.OracleServiceId;
 import legolas.runtime.core.interfaces.ServiceId;
-import legolas.sql.interfaces.DataSet;
 import legolas.sql.interfaces.DatasourceFactory;
-import legolas.sql.interfaces.SQLExecutor;
 import legolas.sql.interfaces.SQLStarter;
 import legolas.sql.interfaces.TargetDatabase;
 import legolas.starter.api.interfaces.StarterComponent;
 import org.testcontainers.containers.OracleContainer;
+import toolbox.data.interfaces.DataSet;
+import toolbox.data.interfaces.SQLExecutor;
 
 import javax.sql.DataSource;
 import java.util.Arrays;

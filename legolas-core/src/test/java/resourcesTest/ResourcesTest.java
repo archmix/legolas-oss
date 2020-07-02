@@ -18,4 +18,9 @@ public class ResourcesTest {
     String content = Resources.create().read(Paths.get("resource.txt")).get();
     Assert.assertEquals("resource.txt read as resource", content);
   }
+
+  @Test
+  public void givenNonExistentResourceWhenReadThenReadAsResource() {
+    Assert.assertFalse(Resources.create().read(Paths.get("inexistent.txt")).isPresent());
+  }
 }

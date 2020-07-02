@@ -30,8 +30,9 @@
     <h2Version>1.4.199</h2Version>
 
     <legolasVersion>1.0.3-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.9</migramiVersion>
-    <compozitorVersion>0.1.11</compozitorVersion>
+    <toolboxVersion>0.0.2-SNAPSHOT</toolboxVersion>
+    <migramiVersion>0.0.11-SNAPSHOT</migramiVersion>
+    <compozitorVersion>0.1.13-SNAPSHOT</compozitorVersion>
     <testcontainersVersion>1.14.2</testcontainersVersion>
   </properties>
 
@@ -83,9 +84,9 @@
       </dependency>
 
       <dependency>
-        <artifactId>legolas-h2-sqlserver-starter</artifactId>
+        <artifactId>toolbox</artifactId>
         <groupId>org.archmix</groupId>
-        <version>${legolasVersion}</version>
+        <version>${toolboxVersion}</version>
       </dependency>
 
       <!-- JSON -->

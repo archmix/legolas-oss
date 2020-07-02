@@ -2,24 +2,20 @@ package legolas.common.interfaces;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import toolbox.resources.interfaces.ResourceStream;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
 public class Resources {
   private final Logger logger = LoggerFactory.getLogger(Resources.class);
-  private final ClassLoader classLoader;
-  private final Charset charset;
+  private final ResourceStream resourceStream;
 
   public Resources(ClassLoader classLoader) {
-    this.classLoader = classLoader;
-    this.charset = StandardCharsets.UTF_8;
+    this.resourceStream = ResourceStream.create(classLoader);
   }
 
   public static Resources create() {
@@ -31,9 +27,9 @@ public class Resources {
   }
 
   public Optional<String> read(Path path) {
-    String content = this.openResourceAsString(path);
+    String content = this.openFileAsString(path);
     if (content == null) {
-      content = this.openFileAsString(path);
+      content = this.openResourceAsString(path);
     }
 
     return Optional.ofNullable(content);
@@ -42,13 +38,13 @@ public class Resources {
   private String openFileAsString(Path path) {
     File file = new File(path.toUri());
     if (!file.exists()) {
-      logger.info("File does not exists on path {}", path.toString());
+      logger.info("File does not exists on path {}. Reading from classpath.", path.toString());
       return null;
     }
 
     try {
       byte[] available = Files.readAllBytes(path);
-      return this.toString(available);
+      return resourceStream.toString(available);
     } catch (IOException e) {
       log(path, e);
       return null;
@@ -56,31 +52,11 @@ public class Resources {
   }
 
   private String openResourceAsString(Path path) {
-    try (InputStream inputStream = this.openResourceStream(path)) {
-      if (inputStream == null) {
-        return null;
-      }
-
-      byte[] available = new byte[inputStream.available()];
-      inputStream.read(available);
-      return new String(available);
-    } catch (IOException e) {
-      log(path, e);
-      return null;
-    }
+    return resourceStream.read(path).orElse(null);
   }
 
   private void log(Path path, IOException e) {
     logger.warn("It was not possible to read file on path {}", path.toString());
     logger.warn("Read error ", e);
   }
-
-  private String toString(byte[] bytes) {
-    return new String(bytes, this.charset);
-  }
-
-  private InputStream openResourceStream(Path path) {
-    return this.classLoader.getResourceAsStream(path.toString());
-  }
-
 }
