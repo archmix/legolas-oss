@@ -14,6 +14,7 @@
     <oracleVersion>19.3.0.0</oracleVersion>
     <sqlserverVersion>8.2.1.jre8</sqlserverVersion>
     <postgresqlVersion>42.2.13</postgresqlVersion>
+    <mysqlVersion>5.1.49</mysqlVersion>
   </properties>
 
   <dependencies>
@@ -29,12 +30,17 @@
       <artifactId>mssql-jdbc</artifactId>
       <version>${sqlserverVersion}</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>${postgresqlVersion}</version>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysqlVersion}</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.projectlombok</groupId>
