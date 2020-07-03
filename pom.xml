@@ -11,7 +11,7 @@
 
   <groupId>org.archmix</groupId>
   <artifactId>legolas-oss</artifactId>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -26,7 +26,7 @@
   </modules>
 
   <properties>
-    <legolasVersion>1.0.4-SNAPSHOT</legolasVersion>
+    <legolasVersion>1.0.5-SNAPSHOT</legolasVersion>
     <toolboxVersion>0.0.2</toolboxVersion>
     <migramiVersion>0.0.11</migramiVersion>
     <compozitorVersion>0.1.13</compozitorVersion>
