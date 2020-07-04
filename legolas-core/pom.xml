@@ -24,7 +24,7 @@
 
     <dependency>
       <groupId>org.archmix</groupId>
-      <artifactId>toolbox</artifactId>
+      <artifactId>toolbox-data</artifactId>
     </dependency>
 
     <dependency>

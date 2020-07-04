@@ -21,11 +21,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.archmix</groupId>
-      <artifactId>toolbox</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>${hikaricpVersion}</version>

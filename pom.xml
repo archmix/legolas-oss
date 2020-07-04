@@ -27,17 +27,20 @@
 
   <properties>
     <legolasVersion>1.0.5-SNAPSHOT</legolasVersion>
-    <toolboxVersion>0.0.2</toolboxVersion>
-    <migramiVersion>0.0.11</migramiVersion>
-    <compozitorVersion>0.1.13</compozitorVersion>
+    <migramiVersion>0.0.12</migramiVersion>
+    <compozitorVersion>0.1.14</compozitorVersion>
 
-    <jacksonVersion>2.11.0</jacksonVersion>
     <testcontainersVersion>1.14.2</testcontainersVersion>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <!-- LEGOLAS -->
+      <dependency>
+        <artifactId>legolas-mysql</artifactId>
+        <groupId>org.archmix</groupId>
+        <version>${legolasVersion}</version>
+      </dependency>
       <dependency>
         <artifactId>legolas-oracle</artifactId>
         <groupId>org.archmix</groupId>
@@ -82,13 +85,6 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- TOOLBOX -->
-      <dependency>
-        <artifactId>toolbox</artifactId>
-        <groupId>org.archmix</groupId>
-        <version>${toolboxVersion}</version>
-      </dependency>
-
       <!-- COMPOZITOR -->
       <dependency>
         <groupId>org.archmix</groupId>
@@ -105,38 +101,6 @@
         <version>${migramiVersion}</version>
         <scope>import</scope>
         <type>pom</type>
-      </dependency>
-
-      <!-- JSON -->
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>${jacksonVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jdk8</artifactId>
-        <version>${jacksonVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>${jacksonVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>${jacksonVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-dataformat-yaml</artifactId>
-        <version>${jacksonVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jsr310</artifactId>
-        <version>${jacksonVersion}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
