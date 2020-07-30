@@ -1,4 +1,4 @@
-package legolas.mysql.infra;
+package legolas.sqlserver.infra;
 
 import legolas.net.core.interfaces.Port;
 import legolas.net.core.interfaces.SocketType;
@@ -6,8 +6,8 @@ import legolas.runtime.core.interfaces.ServiceId;
 import legolas.sql.interfaces.DatasourceFactory;
 import legolas.sql.interfaces.SQLStarter;
 import legolas.sql.interfaces.TargetDatabase;
-import legolas.mysql.interfaces.SQLServerEntry;
-import legolas.mysql.interfaces.SQLServerServiceId;
+import legolas.sqlserver.interfaces.SQLServerEntry;
+import legolas.sqlserver.interfaces.SQLServerServiceId;
 import legolas.starter.api.interfaces.StarterComponent;
 import org.testcontainers.containers.MSSQLServerContainer;
 import toolbox.data.interfaces.SQLExecutor;

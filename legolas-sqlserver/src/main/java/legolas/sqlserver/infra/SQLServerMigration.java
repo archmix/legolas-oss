@@ -1,4 +1,4 @@
-package legolas.mysql.infra;
+package legolas.sqlserver.infra;
 
 import legolas.config.api.interfaces.Configuration;
 import legolas.migration.api.interfaces.MigrationComponent;
@@ -6,8 +6,8 @@ import legolas.migration.api.interfaces.MigrationId;
 import legolas.runtime.core.interfaces.ServiceId;
 import legolas.sql.interfaces.DatabaseConfiguration;
 import legolas.sql.interfaces.SQLMigration;
-import legolas.mysql.interfaces.SQLServerEntry;
-import legolas.mysql.interfaces.SQLServerServiceId;
+import legolas.sqlserver.interfaces.SQLServerEntry;
+import legolas.sqlserver.interfaces.SQLServerServiceId;
 
 @MigrationComponent
 public class SQLServerMigration extends SQLMigration {

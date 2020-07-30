@@ -1,4 +1,4 @@
-package legolas.mysql.interfaces;
+package legolas.sqlserver.interfaces;
 
 import legolas.runtime.core.interfaces.ServiceId;
 

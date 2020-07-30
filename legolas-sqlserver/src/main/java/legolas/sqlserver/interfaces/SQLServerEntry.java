@@ -1,4 +1,4 @@
-package legolas.mysql.interfaces;
+package legolas.sqlserver.interfaces;
 
 import legolas.config.api.interfaces.Entry;
 

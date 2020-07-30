@@ -5,8 +5,8 @@ import legolas.config.api.interfaces.Configuration;
 import legolas.runtime.core.interfaces.RunningEnvironment;
 import legolas.runtime.core.interfaces.RuntimeEnvironment;
 import legolas.sql.interfaces.DatasourceFactory;
-import legolas.mysql.interfaces.SQLServerEntry;
-import legolas.mysql.interfaces.SQLServerServiceId;
+import legolas.sqlserver.interfaces.SQLServerEntry;
+import legolas.sqlserver.interfaces.SQLServerServiceId;
 import org.junit.Assert;
 import org.junit.Test;
 
