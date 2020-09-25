@@ -3,6 +3,7 @@ package legolas.sqlserver.infra;
 import legolas.net.core.interfaces.Port;
 import legolas.net.core.interfaces.SocketType;
 import legolas.runtime.core.interfaces.ServiceId;
+import legolas.sql.interfaces.Databasename;
 import legolas.sql.interfaces.DatasourceFactory;
 import legolas.sql.interfaces.SQLStarter;
 import legolas.sql.interfaces.TargetDatabase;
@@ -31,6 +32,7 @@ public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
       .set(SQLServerEntry.USERNAME, this.username())
       .set(SQLServerEntry.PASSWORD, DEFAULT_PASSWORD)
       .set(SQLServerEntry.DRIVER, JDBC_DRIVER_NAME)
+      .set(SQLServerEntry.DATABASE, this.databaseName())
       .set(SQLServerEntry.URL, url);
   }
 
@@ -53,7 +55,7 @@ public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
   }
 
   public String databaseName() {
-    return super.username().toLowerCase();
+    return Databasename.valueOf().value();
   }
 
   @Override

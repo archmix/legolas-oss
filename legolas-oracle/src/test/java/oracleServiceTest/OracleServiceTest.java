@@ -32,6 +32,9 @@ public class OracleServiceTest {
     String username = configuration.getString(OracleEntry.USERNAME).get();
     String password = configuration.getString(OracleEntry.PASSWORD).get();
 
+    Assert.assertEquals("xe", configuration.getString(OracleEntry.SID).get());
+    Assert.assertEquals(username, configuration.getString(OracleEntry.SCHEMA).get());
+
     DataSource dataSource = DatasourceFactory.toDataSource(url, driver, username, password);
     assertMigration(dataSource);
   }

@@ -30,9 +30,11 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
       .set(OracleEntry.HOST, this.dockerHost())
       .set(OracleEntry.PORT, DEFAULT_PORT)
       .set(OracleEntry.USERNAME, this.username())
+      .set(OracleEntry.SCHEMA, this.username())
       .set(OracleEntry.PASSWORD, PASSWORD)
       .set(OracleEntry.DRIVER, JDBC_DRIVER_NAME)
-      .set(OracleEntry.URL, url);
+      .set(OracleEntry.URL, url)
+      .set(OracleEntry.SID, "xe");
   }
 
   @Override
