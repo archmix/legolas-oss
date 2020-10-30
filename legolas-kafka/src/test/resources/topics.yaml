@@ -1,0 +1,7 @@
+topics:
+  - name: test
+    replicationFactor: 1
+    partitions: 2
+  - name: test.new-topic
+    replicationFactor: 1
+    partitions: 3
