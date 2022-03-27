@@ -10,6 +10,7 @@ import legolas.sql.interfaces.SQLStarter;
 import legolas.sql.interfaces.TargetDatabase;
 import legolas.starter.api.interfaces.StarterComponent;
 import org.testcontainers.containers.OracleContainer;
+import org.testcontainers.utility.DockerImageName;
 import toolbox.data.interfaces.DataSet;
 import toolbox.data.interfaces.SQLExecutor;
 
@@ -39,7 +40,7 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
 
   @Override
   protected OracleContainer container() {
-    return new OracleContainer("oracleinanutshell/oracle-xe-11g");
+    return new OracleContainer(DockerImageName.parse("archmixoss/oracle").asCompatibleSubstituteFor("gvenzl/oracle-xe"));
   }
 
   @Override

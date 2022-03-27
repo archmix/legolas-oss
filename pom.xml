@@ -30,7 +30,7 @@
     <migramiVersion>0.0.12</migramiVersion>
     <compozitorVersion>0.1.14</compozitorVersion>
 
-    <testcontainersVersion>1.14.2</testcontainersVersion>
+    <testcontainersVersion>1.16.3</testcontainersVersion>
   </properties>
 
   <dependencyManagement>
@@ -80,7 +80,7 @@
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers-bom</artifactId>
-        <version>1.14.2</version>
+        <version>${testcontainersVersion}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
