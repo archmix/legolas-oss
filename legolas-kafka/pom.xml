@@ -5,33 +5,30 @@
     <groupId>org.archmix</groupId>
     <version>1.0.10-SNAPSHOT</version>
   </parent>
-
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>legolas-mysql</artifactId>
+  <artifactId>legolas-kafka</artifactId>
 
   <dependencies>
-    <!-- COMPILE -->
     <dependency>
       <groupId>org.archmix</groupId>
-      <artifactId>legolas-sql</artifactId>
+      <artifactId>legolas-docker</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.testcontainers</groupId>
-      <artifactId>mysql</artifactId>
+      <artifactId>kafka</artifactId>
     </dependency>
-
     <dependency>
-      <groupId>org.archmix</groupId>
-      <artifactId>legolas-provided</artifactId>
-      <scope>provided</scope>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
     </dependency>
-
-    <!--TEST -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
     </dependency>
   </dependencies>
 </project>

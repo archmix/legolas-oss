@@ -11,7 +11,7 @@
 
   <groupId>org.archmix</groupId>
   <artifactId>legolas-oss</artifactId>
-  <version>1.0.9-SNAPSHOT</version>
+  <version>1.0.10-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -23,13 +23,15 @@
     <module>legolas-sql</module>
     <module>legolas-sqlserver</module>
     <module>legolas-mysql</module>
+    <module>legolas-kafka</module>
   </modules>
 
   <properties>
-    <legolasVersion>1.0.9-SNAPSHOT</legolasVersion>
+    <legolasVersion>1.0.10-SNAPSHOT</legolasVersion>
     <migramiVersion>0.0.12</migramiVersion>
     <compozitorVersion>0.1.14</compozitorVersion>
-
+    <kafkaVersion>2.6.0</kafkaVersion>
+    <jacksonVersion>2.11.3</jacksonVersion>
     <testcontainersVersion>1.16.3</testcontainersVersion>
   </properties>
 
@@ -83,6 +85,21 @@
         <version>${testcontainersVersion}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.kafka</groupId>
+        <artifactId>kafka-clients</artifactId>
+        <version>${kafkaVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jacksonVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-yaml</artifactId>
+        <version>${jacksonVersion}</version>
       </dependency>
 
       <!-- COMPOZITOR -->
