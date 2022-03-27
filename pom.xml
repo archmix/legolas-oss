@@ -31,7 +31,7 @@
     <migramiVersion>0.0.12</migramiVersion>
     <compozitorVersion>0.1.14</compozitorVersion>
     <kafkaVersion>2.6.0</kafkaVersion>
-    <jacksonVersion>2.11.3</jacksonVersion>
+    <jacksonVersion>2.13.2.1</jacksonVersion>
     <testcontainersVersion>1.16.3</testcontainersVersion>
   </properties>
 
