@@ -26,7 +26,6 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
 
   public OracleStarter() {
     System.setProperty("oracle.jdbc.timezoneAsRegion", "false");
-    String url = String.format("jdbc:oracle:thin:@%s:%d/xe", this.dockerHost(), DEFAULT_PORT);
     this.configuration
       .set(OracleEntry.HOST, this.dockerHost())
       .set(OracleEntry.PORT, DEFAULT_PORT)
@@ -34,18 +33,19 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
       .set(OracleEntry.SCHEMA, this.username())
       .set(OracleEntry.PASSWORD, PASSWORD)
       .set(OracleEntry.DRIVER, JDBC_DRIVER_NAME)
-      .set(OracleEntry.URL, url)
       .set(OracleEntry.SID, "xe");
   }
 
   @Override
   protected OracleContainer container() {
-    return new OracleContainer(DockerImageName.parse("archmixoss/oracle").asCompatibleSubstituteFor("gvenzl/oracle-xe"));
+    return new OracleContainer("gvenzl/oracle-xe").withUsername(this.username()).withPassword(PASSWORD);
   }
 
   @Override
   protected void setConfiguration(OracleContainer container) {
-    DataSource dataSource = DatasourceFactory.toDataSource(container.getJdbcUrl(), JDBC_DRIVER_NAME);
+    this.configuration.set(OracleEntry.URL, container.getJdbcUrl());
+
+    DataSource dataSource = DatasourceFactory.toDataSource(container.getJdbcUrl(), JDBC_DRIVER_NAME, container.getUsername(), container.getPassword());
     SQLExecutor sqlExecutor = SQLExecutor.create(dataSource);
 
     String selectUser = "SELECT 1 FROM all_users WHERE username = ?";
