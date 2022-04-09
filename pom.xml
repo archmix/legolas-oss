@@ -11,7 +11,7 @@
 
   <groupId>org.archmix</groupId>
   <artifactId>legolas-oss</artifactId>
-  <version>1.0.11</version>
+  <version>1.0.12-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Archmix Legolas Open Source Solution</name>
@@ -31,7 +31,7 @@
   </modules>
 
   <properties>
-    <legolasVersion>1.0.11</legolasVersion>
+    <legolasVersion>1.0.12-SNAPSHOT</legolasVersion>
     <migramiVersion>0.0.12</migramiVersion>
     <compozitorVersion>0.1.17</compozitorVersion>
     <kafkaVersion>2.6.0</kafkaVersion>
@@ -129,7 +129,7 @@
   <scm>
     <connection>scm:git:git://github.com/archmix/${project.artifactId}.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/archmix/${project.artifactId}.git</developerConnection>
-    <tag>v1.0.11</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/archmix</url>
   </scm>
 
