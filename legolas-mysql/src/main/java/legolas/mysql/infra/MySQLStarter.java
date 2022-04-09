@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @StarterComponent
 public class MySQLStarter extends SQLStarter<MySQLContainer> {
   static final String DEFAULT_PASSWORD = "mysql";
-  static final String JDBC_DRIVER_NAME = "com.mysql.jdbc.Driver";
+  static final String JDBC_DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
   static final Integer DEFAULT_PORT = 3306;
 
   public MySQLStarter() {

@@ -27,10 +27,9 @@ public class Promise<T> {
       if (cause != null) {
         this.failed = Boolean.TRUE;
         this.cause = cause;
-      } else {
-        this.succeded = Boolean.TRUE;
-        this.result = result;
+        return;
       }
+      this.succeded = Boolean.TRUE;
     };
 
     this.future.whenComplete(completionConsumer).whenCompleteAsync(completionConsumer);
@@ -90,10 +89,6 @@ public class Promise<T> {
 
   public Throwable cause() {
     return cause;
-  }
-
-  public T result() {
-    return result;
   }
 
   CompletableFuture<T> asFuture() {
