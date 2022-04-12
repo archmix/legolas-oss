@@ -32,7 +32,7 @@
 
   <properties>
     <legolasVersion>1.0.12-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.12</migramiVersion>
+    <migramiVersion>0.0.13</migramiVersion>
     <compozitorVersion>0.1.17</compozitorVersion>
     <kafkaVersion>2.6.0</kafkaVersion>
     <jacksonVersion>2.11.3</jacksonVersion>
