@@ -34,7 +34,7 @@
     <legolasVersion>1.0.13-SNAPSHOT</legolasVersion>
     <migramiVersion>0.0.13</migramiVersion>
     <compozitorVersion>0.1.17</compozitorVersion>
-    <kafkaVersion>2.6.0</kafkaVersion>
+    <kafkaVersion>2.6.3</kafkaVersion>
     <jacksonVersion>2.11.3</jacksonVersion>
     <testcontainersVersion>1.16.3</testcontainersVersion>
   </properties>
