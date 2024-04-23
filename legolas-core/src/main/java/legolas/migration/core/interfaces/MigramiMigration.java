@@ -12,7 +12,7 @@ public abstract class MigramiMigration implements Migration {
   @Override
   public final void migrate(RunningEnvironment runningEnvironment) {
     String path = ResourcePath.create(SERVICES_PATH, this.migrationPath()).path();
-    MigramiCategory category = MigramiCategory.MigramiCategoryAdapter.create("oracle", path);
+    MigramiCategory category = MigramiCategory.MigramiCategoryAdapter.create("migration", path);
 
     Migrami migrami = migrami(runningEnvironment, category);
     migrami.migrate();

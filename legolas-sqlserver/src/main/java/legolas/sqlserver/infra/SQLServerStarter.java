@@ -1,9 +1,9 @@
 package legolas.sqlserver.infra;
 
+import legolas.config.api.interfaces.Entry;
 import legolas.net.core.interfaces.Port;
 import legolas.net.core.interfaces.SocketType;
 import legolas.runtime.core.interfaces.ServiceId;
-import legolas.sql.interfaces.Databasename;
 import legolas.sql.interfaces.DatasourceFactory;
 import legolas.sql.interfaces.SQLStarter;
 import legolas.sql.interfaces.TargetDatabase;
@@ -11,6 +11,7 @@ import legolas.sqlserver.interfaces.SQLServerEntry;
 import legolas.sqlserver.interfaces.SQLServerServiceId;
 import legolas.starter.api.interfaces.StarterComponent;
 import org.testcontainers.containers.MSSQLServerContainer;
+import org.testcontainers.utility.DockerImageName;
 import toolbox.data.interfaces.SQLExecutor;
 
 import javax.sql.DataSource;
@@ -20,62 +21,51 @@ import java.util.stream.Stream;
 
 @StarterComponent
 public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
-  static final String DEFAULT_PASSWORD = "$qlS3rver";
-  static final String JDBC_DRIVER_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
   static final Integer DEFAULT_PORT = 1433;
-
-  public SQLServerStarter() {
-    String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s", this.dockerHost(), DEFAULT_PORT, this.databaseName());
-    this.configuration
-      .set(SQLServerEntry.HOST, this.dockerHost())
-      .set(SQLServerEntry.PORT, DEFAULT_PORT)
-      .set(SQLServerEntry.USERNAME, this.username())
-      .set(SQLServerEntry.PASSWORD, DEFAULT_PASSWORD)
-      .set(SQLServerEntry.DRIVER, JDBC_DRIVER_NAME)
-      .set(SQLServerEntry.DATABASE, this.databaseName())
-      .set(SQLServerEntry.URL, url);
-  }
 
   @Override
   protected MSSQLServerContainer container() {
-    return new MSSQLServerContainer().withPassword(DEFAULT_PASSWORD);
+    return new MSSQLServerContainer(DockerImageName.parse("mcr.microsoft.com/mssql/server:2017-CU12"));
   }
 
   @Override
-  protected void setConfiguration(MSSQLServerContainer container) {
-    DataSource dataSource = DatasourceFactory.toDataSource(container.getJdbcUrl(), JDBC_DRIVER_NAME, this.username(), DEFAULT_PASSWORD);
-    SQLExecutor sqlExecutor = SQLExecutor.create(dataSource);
-
-    String databaseExists = "SELECT 1 FROM sys.databases WHERE name = ?";
-    Integer size = sqlExecutor.query(databaseExists, this.databaseName()).size();
-    if(size == 0){
-      String createDatabase = MessageFormat.format("CREATE DATABASE {0}", this.databaseName());
-      sqlExecutor.execute(createDatabase);
-    }
-  }
-
-  public String databaseName() {
-    return Databasename.valueOf().value();
+  protected Integer defaultPort() {
+    return MSSQLServerContainer.MS_SQL_SERVER_PORT;
   }
 
   @Override
-  protected String username() {
-    return "sa";
+  protected Entry urlEntry() {
+    return SQLServerEntry.URL;
+  }
+
+  @Override
+  protected Entry hostEntry() {
+    return SQLServerEntry.HOST;
+  }
+
+  @Override
+  protected Entry portEntry() {
+    return SQLServerEntry.PORT;
+  }
+
+  @Override
+  protected Entry usernameEntry() {
+    return SQLServerEntry.USERNAME;
+  }
+
+  @Override
+  protected Entry passwordEntry() {
+    return SQLServerEntry.PASSWORD;
+  }
+
+  @Override
+  protected Entry driverEntry() {
+    return SQLServerEntry.DRIVER;
   }
 
   @Override
   protected TargetDatabase targetDatabase() {
     return TargetDatabase.SQL_SERVER;
-  }
-
-  @Override
-  public Stream<Port> ports() {
-    return Arrays.asList(Port.create(DEFAULT_PORT)).stream();
-  }
-
-  @Override
-  public SocketType socketType() {
-    return SocketType.TCP;
   }
 
   @Override

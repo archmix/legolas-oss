@@ -9,7 +9,6 @@ public enum OracleEntry implements Entry {
   DRIVER("oracle.driver"),
   USERNAME("oracle.username"),
   PASSWORD("oracle.password"),
-  SCHEMA("oracle.schema"),
   SID("oracle.sid");
 
   private final String value;

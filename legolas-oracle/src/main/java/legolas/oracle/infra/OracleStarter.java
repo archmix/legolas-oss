@@ -1,5 +1,6 @@
 package legolas.oracle.infra;
 
+import legolas.config.api.interfaces.Entry;
 import legolas.net.core.interfaces.Port;
 import legolas.net.core.interfaces.SocketType;
 import legolas.oracle.interfaces.OracleEntry;
@@ -20,59 +21,60 @@ import java.util.stream.Stream;
 
 @StarterComponent
 public class OracleStarter extends SQLStarter<OracleContainer> {
-  static final String PASSWORD = "oracle";
-  static final String JDBC_DRIVER_NAME = "oracle.jdbc.OracleDriver";
-  static final Integer DEFAULT_PORT = 1521;
+  public static final int DEFAULT_PORT = 1521;
 
   public OracleStarter() {
     System.setProperty("oracle.jdbc.timezoneAsRegion", "false");
-    this.configuration
-      .set(OracleEntry.HOST, this.dockerHost())
-      .set(OracleEntry.PORT, DEFAULT_PORT)
-      .set(OracleEntry.USERNAME, this.username())
-      .set(OracleEntry.SCHEMA, this.username())
-      .set(OracleEntry.PASSWORD, PASSWORD)
-      .set(OracleEntry.DRIVER, JDBC_DRIVER_NAME)
-      .set(OracleEntry.SID, "xe");
   }
 
   @Override
   protected OracleContainer container() {
-    return new OracleContainer("gvenzl/oracle-xe").withUsername(this.username()).withPassword(PASSWORD);
+    return new OracleContainer(DockerImageName.parse("gvenzl/oracle-xe:21-slim-faststart"));
   }
 
   @Override
-  protected void setConfiguration(OracleContainer container) {
-    this.configuration.set(OracleEntry.URL, container.getJdbcUrl());
+  protected void setExtraConfiguration(OracleContainer container) {
+    this.configuration.set(OracleEntry.SID, container.getSid());
+  }
 
-    DataSource dataSource = DatasourceFactory.toDataSource(container.getJdbcUrl(), JDBC_DRIVER_NAME, container.getUsername(), container.getPassword());
-    SQLExecutor sqlExecutor = SQLExecutor.create(dataSource);
+  @Override
+  protected Integer defaultPort() {
+    return DEFAULT_PORT;
+  }
 
-    String selectUser = "SELECT 1 FROM all_users WHERE username = ?";
-    DataSet dataSet = sqlExecutor.query(selectUser, this.username().toUpperCase());
-    if (!dataSet.isEmpty()) {
-      return;
-    }
+  @Override
+  protected Entry urlEntry() {
+    return OracleEntry.URL;
+  }
 
-    String createUser = String.format("CREATE USER %s IDENTIFIED BY %s", this.username(), PASSWORD);
-    String grantDBA = String.format("GRANT DBA TO %s", this.username());
-    sqlExecutor.execute(createUser);
-    sqlExecutor.execute(grantDBA);
+  @Override
+  protected Entry hostEntry() {
+    return OracleEntry.HOST;
+  }
+
+  @Override
+  protected Entry portEntry() {
+    return OracleEntry.PORT;
+  }
+
+  @Override
+  protected Entry usernameEntry() {
+    return OracleEntry.USERNAME;
+  }
+
+  @Override
+  protected Entry passwordEntry() {
+    return OracleEntry.PASSWORD;
+  }
+
+  @Override
+  protected Entry driverEntry() {
+    return OracleEntry.DRIVER;
   }
 
   @Override
   protected TargetDatabase targetDatabase() {
     return TargetDatabase.ORACLE;
-  }
-
-  @Override
-  public Stream<Port> ports() {
-    return Arrays.asList(Port.create(DEFAULT_PORT)).stream();
-  }
-
-  @Override
-  public SocketType socketType() {
-    return SocketType.TCP;
   }
 
   @Override

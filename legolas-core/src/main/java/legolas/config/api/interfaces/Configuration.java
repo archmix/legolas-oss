@@ -23,11 +23,6 @@ public class Configuration extends HashObject<Configuration, Entry> {
     return create(configMap);
   }
 
-  @Override
-  protected String toString(Entry entry) {
-    return entry.value();
-  }
-
   public static Configuration create() {
     return new Configuration(new HashMap<>());
   }

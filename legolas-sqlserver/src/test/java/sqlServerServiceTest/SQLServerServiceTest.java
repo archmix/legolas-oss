@@ -2,10 +2,8 @@ package sqlServerServiceTest;
 
 import legolas.async.api.interfaces.Promise;
 import legolas.config.api.interfaces.Configuration;
-import legolas.docker.interfaces.Username;
 import legolas.runtime.core.interfaces.RunningEnvironment;
 import legolas.runtime.core.interfaces.RuntimeEnvironment;
-import legolas.sql.interfaces.Databasename;
 import legolas.sql.interfaces.DatasourceFactory;
 import legolas.sqlserver.interfaces.SQLServerEntry;
 import legolas.sqlserver.interfaces.SQLServerServiceId;
@@ -33,8 +31,6 @@ public class SQLServerServiceTest {
     String driver = configuration.getString(SQLServerEntry.DRIVER).get();
     String username = configuration.getString(SQLServerEntry.USERNAME).get();
     String password = configuration.getString(SQLServerEntry.PASSWORD).get();
-
-    Assert.assertEquals(Databasename.valueOf().value().toLowerCase(), configuration.getString(SQLServerEntry.DATABASE).get());
 
     DataSource dataSource = DatasourceFactory.toDataSource(url, driver, username, password);
     assertMigration(dataSource);

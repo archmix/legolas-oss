@@ -5,13 +5,12 @@
   <parent>
     <groupId>org.archmix</groupId>
     <artifactId>java-parent</artifactId>
-    <version>1.8.2</version>
+    <version>1.11.0</version>
     <relativePath />
   </parent>
 
-  <groupId>org.archmix</groupId>
   <artifactId>legolas-oss</artifactId>
-  <version>1.0.10-SNAPSHOT</version>
+  <version>1.0.13-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Archmix Legolas Open Source Solution</name>
@@ -31,12 +30,12 @@
   </modules>
 
   <properties>
-    <legolasVersion>1.0.10-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.12</migramiVersion>
-    <compozitorVersion>0.1.17</compozitorVersion>
-    <kafkaVersion>2.6.0</kafkaVersion>
-    <jacksonVersion>2.11.3</jacksonVersion>
-    <testcontainersVersion>1.16.3</testcontainersVersion>
+    <legolasVersion>1.0.13-SNAPSHOT</legolasVersion>
+    <migramiVersion>0.0.14</migramiVersion>
+    <compozitorVersion>0.1.18</compozitorVersion>
+    <kafkaVersion>3.7.0</kafkaVersion>
+    <jacksonVersion>2.17.0</jacksonVersion>
+    <testcontainersVersion>1.19.7</testcontainersVersion>
   </properties>
 
   <dependencyManagement>

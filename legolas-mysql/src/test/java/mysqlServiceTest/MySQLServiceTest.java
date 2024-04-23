@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 public class MySQLServiceTest {
 
   @Test
-  public void shouldStartSQLServerAndMigrate() {
+  public void shouldStartMySQLAndMigrate() {
     ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     Promise<RunningEnvironment> promise = RuntimeEnvironment.TEST.start(executorService);

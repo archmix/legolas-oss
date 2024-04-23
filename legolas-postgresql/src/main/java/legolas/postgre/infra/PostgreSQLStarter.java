@@ -1,5 +1,6 @@
 package legolas.postgre.infra;
 
+import legolas.config.api.interfaces.Entry;
 import legolas.net.core.interfaces.Port;
 import legolas.net.core.interfaces.SocketType;
 import legolas.postgre.interfaces.PostgreSQLEntry;
@@ -10,57 +11,58 @@ import legolas.sql.interfaces.SQLStarter;
 import legolas.sql.interfaces.TargetDatabase;
 import legolas.starter.api.interfaces.StarterComponent;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.utility.DockerImageName;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 @StarterComponent
 public class PostgreSQLStarter extends SQLStarter<PostgreSQLContainer> {
-  static final String PASSWORD = "postgre";
-  static final String JDBC_DRIVER_NAME = "org.postgresql.Driver";
   static final int DEFAULT_PORT = 5432;
-
-  public PostgreSQLStarter() {
-    String database = this.databaseName();
-    String url = String.format("jdbc:postgresql://%s:%d/%s", this.dockerHost(), DEFAULT_PORT, database);
-    this.configuration
-      .set(PostgreSQLEntry.HOST, this.dockerHost())
-      .set(PostgreSQLEntry.PORT, DEFAULT_PORT)
-      .set(PostgreSQLEntry.USERNAME, this.username())
-      .set(PostgreSQLEntry.PASSWORD, PASSWORD)
-      .set(PostgreSQLEntry.DRIVER, JDBC_DRIVER_NAME)
-      .set(PostgreSQLEntry.URL, url);
-  }
 
   @Override
   protected PostgreSQLContainer container() {
-    return new PostgreSQLContainer().withUsername(this.username())
-      .withPassword(PASSWORD)
-      .withDatabaseName(this.databaseName());
+    return new PostgreSQLContainer(DockerImageName.parse("postgres:9.6.12"));
   }
 
   @Override
-  protected void setConfiguration(PostgreSQLContainer container) {
-    this.configuration.set(PostgreSQLEntry.URL, container.getJdbcUrl());
+  protected Integer defaultPort() {
+    return PostgreSQLContainer.POSTGRESQL_PORT;
   }
 
-  private String databaseName(){
-    return this.username().toLowerCase();
+  @Override
+  protected Entry urlEntry() {
+    return PostgreSQLEntry.URL;
+  }
+
+  @Override
+  protected Entry hostEntry() {
+    return PostgreSQLEntry.HOST;
+  }
+
+  @Override
+  protected Entry portEntry() {
+    return PostgreSQLEntry.PORT;
+  }
+
+  @Override
+  protected Entry usernameEntry() {
+    return PostgreSQLEntry.USERNAME;
+  }
+
+  @Override
+  protected Entry passwordEntry() {
+    return PostgreSQLEntry.PASSWORD;
+  }
+
+  @Override
+  protected Entry driverEntry() {
+    return PostgreSQLEntry.DRIVER;
   }
 
   @Override
   protected TargetDatabase targetDatabase() {
     return TargetDatabase.POSTGRESQL;
-  }
-
-  @Override
-  public Stream<Port> ports() {
-    return Arrays.asList(Port.create(DEFAULT_PORT)).stream();
-  }
-
-  @Override
-  public SocketType socketType() {
-    return SocketType.TCP;
   }
 
   @Override
