@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 public class KafkaStarter extends DockerStarter<KafkaContainer> {
 
   static final int DEFAULT_PORT = 9092;
+  private final KafkaContainer container = new KafkaContainer();
 
   @Override
   protected void setConfiguration(final KafkaContainer container) {
@@ -24,7 +25,7 @@ public class KafkaStarter extends DockerStarter<KafkaContainer> {
 
   @Override
   protected KafkaContainer container() {
-    return new KafkaContainer();
+    return container;
   }
 
   @Override

@@ -19,10 +19,11 @@ import java.util.stream.Stream;
 @StarterComponent
 public class PostgreSQLStarter extends SQLStarter<PostgreSQLContainer> {
   static final int DEFAULT_PORT = 5432;
+  private final PostgreSQLContainer container = new PostgreSQLContainer(DockerImageName.parse("postgres:9.6.12"));
 
   @Override
   protected PostgreSQLContainer container() {
-    return new PostgreSQLContainer(DockerImageName.parse("postgres:9.6.12"));
+    return this.container;
   }
 
   @Override

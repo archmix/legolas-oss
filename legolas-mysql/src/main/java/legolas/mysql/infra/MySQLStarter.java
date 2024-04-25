@@ -12,10 +12,11 @@ import org.testcontainers.utility.DockerImageName;
 
 @StarterComponent
 public class MySQLStarter extends SQLStarter<MySQLContainer> {
+  private final MySQLContainer container = new MySQLContainer(DockerImageName.parse("mysql:8.0.36"));
 
   @Override
   protected MySQLContainer container() {
-    return new MySQLContainer(DockerImageName.parse("mysql:8.0.36"));
+    return container;
   }
 
   @Override

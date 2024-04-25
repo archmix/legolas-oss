@@ -16,17 +16,22 @@ class StarterRunner {
     ServiceLoader.load(Starter.class).forEach(service -> {
       logger.info("{} initializing", service.name());
 
+      RuntimeEnvironment runtimeEnvironment = environment.runtimeEnvironment();
+
       Configuration configuration = service.configuration();
       environment.add(RunningInstance.create(service.id(), configuration));
 
       boolean shouldStart = true;
+
       if (service instanceof PortStarter) {
-        shouldStart = this.shouldStart((PortStarter) service, environment.runtimeEnvironment());
+        shouldStart = this.shouldStart((PortStarter) service, runtimeEnvironment);
       }
 
       if (shouldStart) {
-        service.start(environment.runtimeEnvironment());
+        service.start(runtimeEnvironment);
+        return;
       }
+      service.attach(runtimeEnvironment);
     });
   }
 

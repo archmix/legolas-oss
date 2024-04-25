@@ -22,10 +22,11 @@ import java.util.stream.Stream;
 @StarterComponent
 public class SQLServerStarter extends SQLStarter<MSSQLServerContainer> {
   static final Integer DEFAULT_PORT = 1433;
+  private final MSSQLServerContainer container = new MSSQLServerContainer(DockerImageName.parse("mcr.microsoft.com/mssql/server:2017-CU12"));
 
   @Override
   protected MSSQLServerContainer container() {
-    return new MSSQLServerContainer(DockerImageName.parse("mcr.microsoft.com/mssql/server:2017-CU12"));
+    return container;
   }
 
   @Override

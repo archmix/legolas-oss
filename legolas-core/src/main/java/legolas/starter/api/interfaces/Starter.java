@@ -7,5 +7,7 @@ import legolas.runtime.core.interfaces.RuntimeEnvironment;
 public interface Starter extends LifecycleService {
   void start(RuntimeEnvironment runtimeEnvironment);
 
+  void attach(RuntimeEnvironment runtimeEnvironment);
+
   Configuration configuration();
 }

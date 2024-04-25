@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 @StarterComponent
 public class OracleStarter extends SQLStarter<OracleContainer> {
   public static final int DEFAULT_PORT = 1521;
+  private final OracleContainer container = new OracleContainer(DockerImageName.parse("gvenzl/oracle-xe:21-slim-faststart"));
 
   public OracleStarter() {
     System.setProperty("oracle.jdbc.timezoneAsRegion", "false");
@@ -29,7 +30,7 @@ public class OracleStarter extends SQLStarter<OracleContainer> {
 
   @Override
   protected OracleContainer container() {
-    return new OracleContainer(DockerImageName.parse("gvenzl/oracle-xe:21-slim-faststart"));
+    return container;
   }
 
   @Override

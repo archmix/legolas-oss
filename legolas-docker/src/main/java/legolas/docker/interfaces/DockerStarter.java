@@ -18,11 +18,14 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 public abstract class DockerStarter<C extends GenericContainer> implements PortStarter {
   protected static final Logger logger = LoggerFactory.getLogger(DockerStarter.class);
   private static final Long DEFAULT_STARTUP_TIMEOUT_SECONDS = 240L;
+  public static final String EXITED_STATE = "exited";
+  public static final String RUNNING_STATE = "running";
 
   static {
     setReusable();
@@ -40,7 +43,11 @@ public abstract class DockerStarter<C extends GenericContainer> implements PortS
     try {
       File file = new File(System.getProperty("user.home"), ".testcontainers.properties");
       if (!file.exists()) {
-        file.createNewFile();
+        boolean created = file.createNewFile();
+        if(!created) {
+          logger.warn("*** Cannot create testcontainers properties file. Has user permission to create files? ***");
+          return;
+        }
       }
 
       Properties properties = new Properties();
@@ -54,20 +61,35 @@ public abstract class DockerStarter<C extends GenericContainer> implements PortS
 
   @Override
   public final void start(RuntimeEnvironment runtimeEnvironment) {
+    this.configure(runtimeEnvironment);
+  }
+
+  @Override
+  public void attach(RuntimeEnvironment runtimeEnvironment) {
+    this.configure(runtimeEnvironment);
+  }
+
+  private void configure(RuntimeEnvironment runtimeEnvironment){
     Map<String, String> labels = labels();
 
+    if(runtimeEnvironment == RuntimeEnvironment.TEST){
+      this.execute(this::stopContainer);
+      this.remove();
+    }
+
     C targetContainer = this.container();
+    targetContainer.withNetwork(null).withLabels(labels);
 
     if(runtimeEnvironment == RuntimeEnvironment.LOCAL) {
-      startContainer(labels);
-      targetContainer.withReuse(true).withNetwork(null).withLabels(labels);
+      targetContainer.withReuse(true);
     }
 
     List<String> portBindings = this.ports().map(port -> String.format("%d:%d", port.value(), port.value())).collect(Collectors.toList());
     targetContainer.setPortBindings(portBindings);
+    targetContainer.withLogConsumer(new Slf4jLogConsumer(logger));
 
-    targetContainer.withLogConsumer(new Slf4jLogConsumer(logger)).start();
-
+    this.execute(this::startContainer);
+    targetContainer.start();
     this.setConfiguration(targetContainer);
   }
 
@@ -77,26 +99,39 @@ public abstract class DockerStarter<C extends GenericContainer> implements PortS
     return labels;
   }
 
-  private void startContainer(Map<String, String> labels) {
-    DockerClient client = this.dockerClientFactory.client();
-    List<Container> containers = client.listContainersCmd().withShowAll(true).withLabelFilter(labels).exec();
-    for (Container container : containers) {
-      String state = container.getState();
-      if ("exited".equalsIgnoreCase(state)) {
-        client.startContainerCmd(container.getId()).exec();
+  @Override
+  public void stop() {
+    this.execute(this::stopContainer);
+  }
+
+  private void remove() {
+    this.execute((client, container) ->{
+      if(EXITED_STATE.equalsIgnoreCase(container.getState())){
+        client.removeContainerCmd(container.getId()).exec();
       }
+    });
+  }
+
+  private void startContainer(DockerClient client, Container container){
+    if(EXITED_STATE.equalsIgnoreCase(container.getState())){
+      logger.info("Starting container {}", container.getId());
+      client.startContainerCmd(container.getId()).exec();
     }
   }
 
-  public void stop() {
+  private void stopContainer(DockerClient client, Container container){
+    if(RUNNING_STATE.equalsIgnoreCase(container.getState())){
+      client.stopContainerCmd(container.getId()).exec();
+    }
+  }
+
+  private void execute(BiConsumer<DockerClient, Container> consumer){
     Map<String, String> labels = this.labels();
     DockerClient client = this.dockerClientFactory.client();
     List<Container> containers = client.listContainersCmd().withShowAll(true).withLabelFilter(labels).exec();
     for (Container container : containers) {
-      String state = container.getState();
-      if ("running".equalsIgnoreCase(state)) {
-        client.stopContainerCmd(container.getId()).exec();
-      }
+      consumer.accept(client, container);
+
     }
   }
 
