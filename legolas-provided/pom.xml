@@ -14,7 +14,7 @@
     <oracleVersion>19.3.0.0</oracleVersion>
     <sqlserverVersion>8.2.1.jre8</sqlserverVersion>
     <postgresqlVersion>42.2.13</postgresqlVersion>
-    <mysqlVersion>8.0.16</mysqlVersion>
+    <mysqlVersion>8.0.28</mysqlVersion>
   </properties>
 
   <dependencies>
