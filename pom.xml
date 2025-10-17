@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.archmix</groupId>
     <artifactId>java-parent</artifactId>
-    <version>1.11.0</version>
+    <version>1.11.1</version>
     <relativePath />
   </parent>
 
@@ -31,11 +31,11 @@
 
   <properties>
     <legolasVersion>1.0.15-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.14</migramiVersion>
-    <compozitorVersion>0.1.18</compozitorVersion>
-    <kafkaVersion>3.7.0</kafkaVersion>
-    <jacksonVersion>2.17.0</jacksonVersion>
-    <testcontainersVersion>1.19.7</testcontainersVersion>
+    <migramiVersion>0.0.15</migramiVersion>
+    <compozitorVersion>0.1.19</compozitorVersion>
+    <kafkaVersion>4.1.0</kafkaVersion>
+    <jacksonVersion>2.19.2</jacksonVersion>
+    <testcontainersVersion>1.21.3</testcontainersVersion>
   </properties>
 
   <dependencyManagement>
@@ -132,24 +132,8 @@
     <url>https://github.com/archmix</url>
   </scm>
 
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
   <issueManagement>
     <system>Github issue tracker</system>
     <url>https://github.com/archmix/${project.artifactId}/issues</url>
   </issueManagement>
-
-  <developers>
-    <developer>
-      <id>mrbraz</id>
-      <name>Anderson Braz</name>
-      <email>mrbraz@archmix.org</email>
-    </developer>
-  </developers>
 </project>

@@ -1,6 +1,5 @@
 package legolas.migration.processor.infra;
 
-import com.google.common.collect.Sets;
 import compozitor.processor.core.interfaces.Processor;
 import compozitor.processor.core.interfaces.ServiceProcessor;
 import legolas.migration.api.interfaces.Migration;
@@ -19,6 +18,6 @@ public class MigrationComponentProcessor extends ServiceProcessor {
 
   @Override
   public Set<String> getSupportedAnnotationTypes() {
-    return Sets.newHashSet(MigrationComponent.class.getName());
+    return Set.of(MigrationComponent.class.getName());
   }
 }

@@ -9,6 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>legolas-sqlserver</artifactId>
+  <name>Legolas SQL Server</name>
 
   <dependencies>
     <!-- COMPILE -->

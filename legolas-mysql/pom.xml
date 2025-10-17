@@ -9,6 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>legolas-mysql</artifactId>
+  <name>Legolas MySQL</name>
 
   <dependencies>
     <!-- COMPILE -->

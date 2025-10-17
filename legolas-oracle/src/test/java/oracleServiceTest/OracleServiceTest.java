@@ -1,31 +1,25 @@
 package oracleServiceTest;
 
-import legolas.async.api.interfaces.Promise;
 import legolas.config.api.interfaces.Configuration;
 import legolas.oracle.interfaces.OracleEntry;
 import legolas.oracle.interfaces.OracleServiceId;
+import legolas.provided.infra.LegolasExtension;
 import legolas.runtime.core.interfaces.RunningEnvironment;
-import legolas.runtime.core.interfaces.RuntimeEnvironment;
 import legolas.sql.interfaces.DatasourceFactory;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+@ExtendWith(LegolasExtension.class)
 public class OracleServiceTest {
 
   @Test
-  public void shouldStartOracleAndMigrate() {
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-    Promise<RunningEnvironment> promise = RuntimeEnvironment.TEST.start(executorService);
-    RunningEnvironment environment = promise.get();
-
+  public void shouldStartOracleAndMigrate(RunningEnvironment environment) {
     Configuration configuration = environment.get(OracleServiceId.INSTANCE).get().configuration();
     String url = configuration.getString(OracleEntry.URL).get();
     String driver = configuration.getString(OracleEntry.DRIVER).get();

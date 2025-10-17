@@ -9,8 +9,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>legolas-docker</artifactId>
+  <name>Legolas Docker</name>
 
-  <dependencies><!-- COMPILE -->
+  <dependencies>
     <dependency>
       <groupId>org.archmix</groupId>
       <artifactId>legolas-core</artifactId>
@@ -19,12 +20,6 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.archmix</groupId>
-      <artifactId>legolas-provided</artifactId>
-      <scope>provided</scope>
     </dependency>
 
     <!--TEST -->
@@ -36,6 +31,10 @@
       <groupId>org.archmix</groupId>
       <artifactId>compozitor-test</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.archmix</groupId>
+      <artifactId>legolas-provided</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
 </project>

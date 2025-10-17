@@ -8,9 +8,10 @@
   </parent>
 
   <artifactId>legolas-sql</artifactId>
+  <name>Legolas SQL</name>
 
   <properties>
-    <hikaricpVersion>3.4.5</hikaricpVersion>
+    <hikaricpVersion>7.0.2</hikaricpVersion>
   </properties>
 
   <dependencies>

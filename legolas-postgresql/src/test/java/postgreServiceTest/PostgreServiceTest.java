@@ -1,31 +1,25 @@
 package postgreServiceTest;
 
-import legolas.async.api.interfaces.Promise;
 import legolas.config.api.interfaces.Configuration;
 import legolas.postgre.interfaces.PostgreSQLEntry;
 import legolas.postgre.interfaces.PostgreSQLServiceId;
+import legolas.provided.infra.LegolasExtension;
 import legolas.runtime.core.interfaces.RunningEnvironment;
-import legolas.runtime.core.interfaces.RuntimeEnvironment;
 import legolas.sql.interfaces.DatasourceFactory;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+@ExtendWith(LegolasExtension.class)
 public class PostgreServiceTest {
 
   @Test
-  public void shouldStartPostgreSQLAndMigrate() {
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-    Promise<RunningEnvironment> promise = RuntimeEnvironment.TEST.start(executorService);
-    RunningEnvironment environment = promise.get();
-
+  public void shouldStartPostgreSQLAndMigrate(RunningEnvironment environment) {
     Configuration configuration = environment.get(PostgreSQLServiceId.INSTANCE).get().configuration();
     String url = configuration.getString(PostgreSQLEntry.URL).get();
     String driver = configuration.getString(PostgreSQLEntry.DRIVER).get();

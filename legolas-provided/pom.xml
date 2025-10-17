@@ -7,19 +7,17 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-
   <artifactId>legolas-provided</artifactId>
+  <name>Legolas Provided</name>
 
   <properties>
     <oracleVersion>19.3.0.0</oracleVersion>
-    <sqlserverVersion>8.2.1.jre8</sqlserverVersion>
-    <postgresqlVersion>42.2.13</postgresqlVersion>
-    <mysqlVersion>8.0.16</mysqlVersion>
+    <sqlserverVersion>13.2.1.jre11</sqlserverVersion>
+    <postgresqlVersion>42.7.8</postgresqlVersion>
+    <mysqlVersion>8.0.33</mysqlVersion>
   </properties>
 
   <dependencies>
-
-    <!-- COMPILE -->
     <dependency>
       <groupId>com.oracle.ojdbc</groupId>
       <artifactId>ojdbc8</artifactId>
@@ -42,23 +40,32 @@
     </dependency>
 
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
+      <groupId>org.archmix</groupId>
+      <artifactId>legolas-core</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>${sl4jVersion}</version>
     </dependency>
 
     <!--TEST -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.archmix</groupId>
       <artifactId>compozitor-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
     </dependency>
   </dependencies>
 </project>

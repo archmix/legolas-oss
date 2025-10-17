@@ -9,12 +9,12 @@
   </parent>
 
   <artifactId>legolas-core</artifactId>
+  <name>Legolas Core</name>
 
   <dependencies>
     <dependency>
-      <artifactId>legolas-provided</artifactId>
-      <groupId>org.archmix</groupId>
-      <scope>provided</scope>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
     </dependency>
 
     <dependency>
@@ -35,6 +35,12 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

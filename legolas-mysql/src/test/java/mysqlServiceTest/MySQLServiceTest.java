@@ -1,31 +1,25 @@
 package mysqlServiceTest;
 
-import legolas.async.api.interfaces.Promise;
 import legolas.config.api.interfaces.Configuration;
+import legolas.provided.infra.LegolasExtension;
 import legolas.runtime.core.interfaces.RunningEnvironment;
-import legolas.runtime.core.interfaces.RuntimeEnvironment;
 import legolas.sql.interfaces.DatasourceFactory;
 import legolas.mysql.interfaces.MySQLEntry;
 import legolas.mysql.interfaces.MySQLServiceId;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+@ExtendWith(LegolasExtension.class)
 public class MySQLServiceTest {
 
   @Test
-  public void shouldStartMySQLAndMigrate() {
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-    Promise<RunningEnvironment> promise = RuntimeEnvironment.TEST.start(executorService);
-    RunningEnvironment environment = promise.get();
-
+  public void shouldStartMySQLAndMigrate(RunningEnvironment environment) {
     Configuration configuration = environment.get(MySQLServiceId.INSTANCE).get().configuration();
     String url = configuration.getString(MySQLEntry.URL).get();
     String driver = configuration.getString(MySQLEntry.DRIVER).get();

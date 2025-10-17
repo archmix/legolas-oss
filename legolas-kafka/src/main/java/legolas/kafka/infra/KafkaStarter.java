@@ -8,6 +8,7 @@ import legolas.net.core.interfaces.SocketType;
 import legolas.runtime.core.interfaces.ServiceId;
 import legolas.starter.api.interfaces.StarterComponent;
 import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.utility.DockerImageName;
 
 import java.util.stream.Stream;
 

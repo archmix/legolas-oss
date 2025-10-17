@@ -1,6 +1,5 @@
 package legolas.starter.processor.infra;
 
-import com.google.common.collect.Sets;
 import compozitor.processor.core.interfaces.Processor;
 import compozitor.processor.core.interfaces.ServiceProcessor;
 import legolas.starter.api.interfaces.Starter;
@@ -23,6 +22,6 @@ public class StarterComponentProcessor extends ServiceProcessor {
 
   @Override
   public Set<String> getSupportedAnnotationTypes() {
-    return Sets.newHashSet(StarterComponent.class.getName());
+    return Set.of(StarterComponent.class.getName());
   }
 }

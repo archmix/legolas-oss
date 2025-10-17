@@ -22,7 +22,7 @@ public class RunningEnvironment {
     return new RunningEnvironment(runtime, configuration);
   }
 
-  public RuntimeEnvironment runtimeEnvironment() {
+  RuntimeEnvironment runtimeEnvironment() {
     return this.runtime;
   }
 
