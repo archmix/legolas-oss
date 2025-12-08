@@ -31,8 +31,8 @@
 
   <properties>
     <legolasVersion>1.0.16-SNAPSHOT</legolasVersion>
-    <migramiVersion>0.0.15</migramiVersion>
-    <compozitorVersion>0.1.19</compozitorVersion>
+    <migramiVersion>0.0.16</migramiVersion>
+    <compozitorVersion>0.1.20</compozitorVersion>
     <kafkaVersion>4.1.0</kafkaVersion>
     <jacksonVersion>2.19.2</jacksonVersion>
     <testcontainersVersion>1.21.3</testcontainersVersion>
