@@ -35,7 +35,7 @@
     <compozitorVersion>0.1.20</compozitorVersion>
     <kafkaVersion>4.1.0</kafkaVersion>
     <jacksonVersion>2.19.2</jacksonVersion>
-    <testcontainersVersion>1.21.3</testcontainersVersion>
+    <testcontainersVersion>1.21.4</testcontainersVersion>
   </properties>
 
   <dependencyManagement>
