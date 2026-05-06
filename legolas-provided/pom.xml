@@ -13,7 +13,7 @@
   <properties>
     <oracleVersion>19.3.0.0</oracleVersion>
     <sqlserverVersion>13.2.1.jre11</sqlserverVersion>
-    <postgresqlVersion>42.7.8</postgresqlVersion>
+    <postgresqlVersion>42.7.11</postgresqlVersion>
     <mysqlVersion>8.0.33</mysqlVersion>
   </properties>
 
